@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".activities.queEsQuizDAS">
+    tools:context=".queEsQuizDAS">
 
     <ImageView
         android:id="@+id/imageView"
@@ -53,5 +53,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.745" />
+
+    <Button
+        android:id="@+id/buttonEntrar"
+        android:layout_width="148dp"
+        android:layout_height="35dp"
+        android:background="#4A148C"
+        android:fontFamily="@font/bubblegum_sans"
+        android:onClick="aboutUs"
+        android:text="about us"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.924"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

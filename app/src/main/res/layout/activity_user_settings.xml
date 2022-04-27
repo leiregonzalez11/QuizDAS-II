@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/quizdas2" />
 
     <Button
-        android:id="@+id/buttonModif"
+        android:id="@+id/buttonVolver"
         android:layout_width="233dp"
         android:layout_height="65dp"
         android:background="#4A148C"

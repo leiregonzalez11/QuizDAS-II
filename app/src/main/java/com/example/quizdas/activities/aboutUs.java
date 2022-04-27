@@ -42,10 +42,9 @@ public class aboutUs extends AppCompatActivity implements OnMapReadyCallback {
 
     }
 
-
     public void volver(View view){
         finish();
-        Intent intent = new Intent(this, aboutUs.class);
+        Intent intent = new Intent(this, queEsQuizDAS.class);
         startActivity(intent);
     }
 }

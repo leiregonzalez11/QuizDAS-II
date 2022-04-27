@@ -48,7 +48,7 @@ public class userSettings extends AppCompatActivity {
             }
         });
 
-        Button modifButton = findViewById(R.id.buttonModif);
+        Button modifButton = findViewById(R.id.buttonVolver);
 
         modifButton.setOnClickListener(new View.OnClickListener() {
             @Override

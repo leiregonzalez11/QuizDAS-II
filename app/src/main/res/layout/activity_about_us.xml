@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".aboutUs">
+    tools:context=".activities.aboutUs">
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,12 +33,13 @@
         tools:context=".MapsActivity" />
 
     <Button
-        android:id="@+id/buttonModif"
+        android:id="@+id/buttonVolver"
         android:layout_width="176dp"
         android:layout_height="50dp"
         android:background="#4A148C"
         android:fontFamily="@font/bubblegum_sans"
         android:text="Volver"
+        android:onClick="volver"
         android:textColor="#FDFFFFFF"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
