@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".userSettings">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="213dp"
+        android:layout_height="89dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051"
+        app:srcCompat="@drawable/quizdas2" />
+
+    <Button
+        android:id="@+id/buttonModif"
+        android:layout_width="233dp"
+        android:layout_height="65dp"
+        android:background="#4A148C"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Modificar Datos"
+        android:textColor="#FDFFFFFF"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.899" />
+
+    <Button
+        android:id="@+id/editFoto"
+        android:layout_width="158dp"
+        android:layout_height="54dp"
+        android:background="#4A148C"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Seleccionar foto..."
+        android:textColor="#FDFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.809"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.237" />
+
+    <EditText
+        android:id="@+id/texttelefonomodif"
+        android:layout_width="329dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:fontFamily="@font/bubblegum_sans"
+        android:textColor="#2E2D2D"
+        android:textSize="20sp"
+        android:theme="@style/CampoTexto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.437" />
+
+    <EditText
+        android:id="@+id/textPaswdModif1"
+        android:layout_width="329dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:fontFamily="@font/bubblegum_sans"
+        android:inputType="textPassword"
+        android:textColor="#2E2D2D"
+        android:textSize="20sp"
+        android:theme="@style/CampoTexto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.588" />
+
+    <EditText
+        android:id="@+id/textPaswdModif2"
+        android:layout_width="329dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:fontFamily="@font/bubblegum_sans"
+        android:inputType="textPassword"
+        android:textColor="#2E2D2D"
+        android:textSize="20sp"
+        android:theme="@style/CampoTexto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.736" />
+
+    <TextView
+        android:id="@+id/textpasswd1"
+        android:layout_width="113dp"
+        android:layout_height="25dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Contraseña"
+        android:textColor="#9C27B0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.515" />
+
+    <TextView
+        android:id="@+id/textpasswd2"
+        android:layout_width="305dp"
+        android:layout_height="32dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Vuelve a introducir la contraseña"
+        android:textColor="#9C27B0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.66" />
+
+    <TextView
+        android:id="@+id/texttel"
+        android:layout_width="113dp"
+        android:layout_height="25dp"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Teléfono"
+        android:textColor="#9C27B0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.374" />
+
+    <ImageView
+        android:id="@+id/imagenperfil"
+        android:layout_width="142dp"
+        android:layout_height="132dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.207"
+        app:srcCompat="@drawable/defaultuser" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

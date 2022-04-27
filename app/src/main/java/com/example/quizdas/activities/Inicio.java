@@ -1,4 +1,4 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.quizdas.R;
 
 public class Inicio extends AppCompatActivity {
 
@@ -29,7 +31,8 @@ public class Inicio extends AppCompatActivity {
 
     /** Called when the user taps the Iniciar Sesión button */
     public void iniciarSesion(View view) {
-        Intent intent = new Intent(this, IniciarSesion.class);
+        //Intent intent = new Intent(this, IniciarSesion.class);
+        Intent intent = new Intent(this, bienvenida.class);
         startActivity(intent);
     }
 

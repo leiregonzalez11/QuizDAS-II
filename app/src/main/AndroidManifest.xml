@@ -3,8 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.quizdas">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--Herramientas del teléfono utilizadas-->
+    <uses-feature android:name="android.hardware.camera2.full" android:required="true"/>
+
+    <!--Permisos dados-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -14,37 +21,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".Terminar"
+            android:name=".activities.aboutUs"
             android:exported="false" />
         <activity
-            android:name=".queEsQuizDAS"
+            android:name=".activities.userSettings"
             android:exported="false" />
         <activity
-            android:name=".Jugar"
+            android:name=".activities.Terminar"
             android:exported="false" />
         <activity
-            android:name=".numPreguntas"
+            android:name=".activities.queEsQuizDAS"
             android:exported="false" />
         <activity
-            android:name=".elegirCategorias"
+            android:name=".activities.Jugar"
             android:exported="false" />
         <activity
-            android:name=".condicionesUso"
+            android:name=".activities.numPreguntas"
             android:exported="false" />
         <activity
-            android:name=".bienvenida"
+            android:name=".activities.elegirCategorias"
             android:exported="false" />
         <activity
-            android:name=".Registrarse"
+            android:name=".activities.condicionesUso"
             android:exported="false" />
         <activity
-            android:name=".IniciarSesion"
+            android:name=".activities.bienvenida"
             android:exported="false" />
         <activity
-            android:name=".Inicio"
+            android:name=".activities.Registrarse"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.IniciarSesion"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Inicio"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,6 +69,15 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>

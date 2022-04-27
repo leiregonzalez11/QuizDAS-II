@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:foregroundTint="#3B8424BF"
-    tools:context=".Registrarse">
+    tools:context=".activities.Registrarse">
 
 
     <TextView
@@ -257,20 +257,49 @@
 
     <EditText
         android:id="@+id/textNombre"
-        android:layout_width="317dp"
-        android:layout_height="44dp"
+        android:layout_width="189dp"
+        android:layout_height="42dp"
         android:ems="10"
         android:fontFamily="@font/bubblegum_sans"
         android:inputType="textPersonName"
         android:singleLine="false"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:theme="@style/CampoTexto"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.239"
+        app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
-        android:theme="@style/CampoTexto"/>
+        app:layout_constraintVertical_bias="0.257" />
+
+    <ImageView
+        android:id="@+id/imagenperfilReg"
+        android:layout_width="99dp"
+        android:layout_height="99dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198"
+        app:srcCompat="@drawable/defaultuser" />
+
+    <Button
+        android:id="@+id/registerFotoButton"
+        android:layout_width="121dp"
+        android:layout_height="34dp"
+        android:background="#4A148C"
+        android:fontFamily="@font/bubblegum_sans"
+        android:text="Elegir foto..."
+        android:textColor="#FDFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

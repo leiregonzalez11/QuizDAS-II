@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:foregroundTint="#00CA00FF"
-    tools:context=".Jugar">
+    tools:context=".activities.Jugar">
 
     <ImageView
         android:id="@+id/imageView"

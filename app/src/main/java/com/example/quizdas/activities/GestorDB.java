@@ -1,22 +1,18 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.google.android.gms.common.util.ArrayUtils;
+import com.example.quizdas.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.Stack;
 
 public class GestorDB extends SQLiteOpenHelper{

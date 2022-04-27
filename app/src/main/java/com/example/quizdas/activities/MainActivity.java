@@ -1,11 +1,12 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.quizdas.R;
 
 public class MainActivity extends AppCompatActivity {
 

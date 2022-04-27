@@ -11,7 +11,7 @@
     <string name="emailVacio">El email no puede estar vacío.</string>
     <string name="emailNoValido">El email introducido no es correcto.</string>
     <string name="emailYaExiste">El email introducido ya está registrado.</string>
-    <string name="usuarioNoexiste">No existe ningún usuario con el email </string>
+    <string name="usuarioNoexiste">No existe ningún usuario con esos datos.</string>
     <string name="contraseñaIncorrecta">Contraseña incorrecta, inténtelo de nuevo.</string>
     <string name="dniNoValido">El DNI introducido no es correcto.</string>
     <string name="dniYaExiste">El DNI introducido ya está registrado.</string>
@@ -51,4 +51,10 @@
     <string name="menos100acertadas"> ¡Te ha faltado muy poco! ¡Casi lo tienes!</string>
     <string name="todaspregacertadas">Enhorabuena, ¡Eres un crack! </string>
     <string name="MsgDespedida">¡Ha sido un placer jugar contigo!</string>
+    <string name="errorBD">Error al iniciar sesión: intentelo de nuevo por favor.</string>
+    <string name="dialog_modificar_titulo">"Registro Completado"</string>
+    <string name="dialog_modificar">¡Datos modificados correctamente!.</string>
+    <string name="dialog_modif_buttonaceptar">Aceptar</string>
+    <string name="google_maps_key">AIzaSyAq4QXhSYBUKpO6eYyrEEyJ2TqRqSHVLyw</string>
+
 </resources>

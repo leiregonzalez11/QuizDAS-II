@@ -1,4 +1,4 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.quizdas.R;
 
 import java.util.regex.Pattern;
 

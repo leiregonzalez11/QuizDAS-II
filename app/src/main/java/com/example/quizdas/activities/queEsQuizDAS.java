@@ -1,8 +1,10 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.quizdas.R;
 
 public class queEsQuizDAS extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.quizdas.R;
+import com.example.quizdas.activities.bienvenida;
 
 public class Terminar extends AppCompatActivity {
 

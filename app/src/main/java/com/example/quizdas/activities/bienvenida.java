@@ -1,4 +1,4 @@
-package com.example.quizdas;
+package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -7,11 +7,12 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.quizdas.R;
 
 public class bienvenida extends AppCompatActivity {
 
@@ -59,6 +60,12 @@ public class bienvenida extends AppCompatActivity {
 
     public void categorias(View view){
         Intent intent = new Intent(this, elegirCategorias.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+    }
+
+    public void config(View view){
+        Intent intent = new Intent(this, userSettings.class);
         intent.putExtra("email", email);
         startActivity(intent);
     }

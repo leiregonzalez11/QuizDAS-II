@@ -5,6 +5,6 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:fontFamily="@font/bubblegum_sans"
-    tools:context=".RegistrarseDialogFragment">
+    tools:context=".dialogs.RegistrarseDialogFragment">
 
 </FrameLayout>
