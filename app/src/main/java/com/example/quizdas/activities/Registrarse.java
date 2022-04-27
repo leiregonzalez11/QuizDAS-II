@@ -33,6 +33,7 @@ public class Registrarse extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        /** Called when the user taps the Elegir foto button */
         Button fotoRegistro = findViewById(R.id.registerFotoButton);
         fotoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,7 @@ public class Registrarse extends AppCompatActivity{
         });
     }
 
+    /** Método utilizado para obtener una imagen, en este caso de la galería */
     public void obtenerImagen(){
 
         Intent intentFoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -86,6 +88,7 @@ public class Registrarse extends AppCompatActivity{
 
     }
 
+    /** Método utilizado para validar los datos del formulario de registro */
     public boolean validarRegistro() {
         boolean valido = true;
         GestorDB dbHelper = GestorDB.getInstance(this);
@@ -102,33 +105,6 @@ public class Registrarse extends AppCompatActivity{
             textNombre.setText("");
             valido = false;
         }
-
-        /*//Validamos el DNI
-
-        NOTA: Actualmente no se utiliza el DNI en ninguna validación de la aplicación, pero no se descarta utilizarlo en
-              futuras mejoras de la aplicación.
-
-        EditText textDNI = findViewById(R.id.textDNI);
-        String dni = textDNI.getText().toString();
-        Pattern dniregex = Pattern.compile("[0-9]{8}[A-Z]");
-        String letrasDNI = "TRWAGMYFPDXBNJZSQVHLCKE";
-        if(dni.equals("")){ //Si el DNI está vacío
-            Toast.makeText(getApplicationContext(), getString(R.string.dniVacio), Toast.LENGTH_SHORT).show();
-            textDNI.setText("");
-            valido = false;
-        }
-        else if (!dniregex.matcher(dni).matches() || dni.charAt(8) != letrasDNI.charAt(Integer.parseInt(dni.substring(0, 8)) % 23)) {
-            //Si el DNI no cumple el patrón de 8 numeros y una letra o la letra no es correcta
-            Toast.makeText(getApplicationContext(), getString(R.string.dniNoValido), Toast.LENGTH_SHORT).show();
-            textDNI.setText("");
-            valido = false;
-        }
-        else if (dbHelper.buscarDni(dni)) {
-            //Si el DNI ya existe en la BD
-            Toast.makeText(getApplicationContext(), getString(R.string.dniYaExiste), Toast.LENGTH_SHORT).show();
-            textDNI.setText("");
-            valido = false;
-        }*/
 
         //Validamos el teléfono, en caso de que hubiera
         EditText texttlfno = findViewById(R.id.textPhone);
@@ -197,6 +173,7 @@ public class Registrarse extends AppCompatActivity{
 
     }
 
+    /** Método para obtener los datos en la interfaz del usuario */
     public ContentValues obtenerDatos(){
 
         ContentValues values = new ContentValues();
@@ -219,6 +196,7 @@ public class Registrarse extends AppCompatActivity{
         return values;
     }
 
+    /** Called when the user taps the Condiciones de Uso Imagebutton */
     public void condicionesdeUso(View view) {
         Intent intent = new Intent(this, condicionesUso.class);
         startActivity(intent);

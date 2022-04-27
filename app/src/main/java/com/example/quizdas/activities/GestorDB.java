@@ -54,12 +54,12 @@ public class GestorDB extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){}
 
-    }
-
+    /** Método para crear las tablas en la la BD local */
     public void crearTablas(SQLiteDatabase sqLiteDatabase){
 
+        /*
         //Esquema de la tabla Usuario
         String query1 = "CREATE TABLE IF NOT EXISTS Usuario (idUser INTEGER NOT NULL PRIMARY KEY AutoIncrement," +
                 "nombre VARCHAR(30) NOT NULL, " +
@@ -67,7 +67,7 @@ public class GestorDB extends SQLiteOpenHelper{
                 "email VARCHAR NOT NULL UNIQUE," +
                 "password VARCHAR(15) NOT NULL);";
         Log.d("Tabla Usuario", query1);
-        sqLiteDatabase.execSQL(query1);
+        sqLiteDatabase.execSQL(query1);*/
 
         //Esquema de la tabla Categoria
         String query2 = "CREATE TABLE IF NOT EXISTS Categoria (idCat INT NOT NULL PRIMARY KEY, "+
@@ -90,6 +90,7 @@ public class GestorDB extends SQLiteOpenHelper{
 
     }
 
+    /** Método para cargar las categorías del juego a la BD local */
     public void insertarCategorias(SQLiteDatabase sqLiteDatabase){
 
         String query = "INSERT INTO Categoria VALUES (1,'Deportes'),(2,'Entretenimiento'),(3,'Historia'),(4,'Geografia'),(5,'Ciencias'), " +
@@ -97,6 +98,7 @@ public class GestorDB extends SQLiteOpenHelper{
         sqLiteDatabase.execSQL(query);
     }
 
+    /** Método para cargar las preguntas del juego a la BD local */
     public void insertarPreguntas(SQLiteDatabase sqLiteDatabase) throws IOException {
 
         //Carga de datos desde un archivo .txt usando res/raw
@@ -117,12 +119,14 @@ public class GestorDB extends SQLiteOpenHelper{
 
     }
 
+    /** Método para insertar un nuevo usuario a la BD local */
     public void insertarUsuario(ContentValues values){
         SQLiteDatabase sqLiteDatabase = sInstance.getWritableDatabase();
         sqLiteDatabase.insert("Usuario", null, values);
         sqLiteDatabase.close();
     }
 
+    /** Método para buscar si un usuario existe en la BD local */
     public boolean buscarUsuario(String email){
         SQLiteDatabase sqLiteDatabase = sInstance.getWritableDatabase();
 
@@ -135,6 +139,7 @@ public class GestorDB extends SQLiteOpenHelper{
         return existe;
     }
 
+    /** Método para comprobar si las contraseñas coinciden */
     public boolean validarContraseña(String email, String passwd){
         SQLiteDatabase sqLiteDatabase = sInstance.getWritableDatabase();
         boolean existe = true;
@@ -148,6 +153,7 @@ public class GestorDB extends SQLiteOpenHelper{
         return existe;
     }
 
+    /** Método para obtener el nombre del usuario de la BD local */
     public String obtenerNombreUser(String email){
         SQLiteDatabase sqLiteDatabase = sInstance.getWritableDatabase();
         boolean existe = true;
@@ -161,6 +167,7 @@ public class GestorDB extends SQLiteOpenHelper{
         return name;
     }
 
+    /** Método para obtener las categorías del juego desde la BD local */
     public String [] obtenerCategorias (){
 
         SQLiteDatabase sqLiteDatabase = sInstance.getWritableDatabase();
@@ -179,6 +186,8 @@ public class GestorDB extends SQLiteOpenHelper{
         return categorias;
     }
 
+    /** Método para obtener el nº de preguntas elegido para el juego
+     *  de la categoria elegida desde la BD local */
     public Pregunta [] obtenerPreguntas(String categoria, int numPreg) {
 
         SQLiteDatabase sqLiteDatabase = sInstance.getReadableDatabase();
@@ -237,6 +246,8 @@ public class GestorDB extends SQLiteOpenHelper{
         return preguntas;
     }
 
+    /** Método para obtener el nº de preguntas elegido para el juego
+     *  desde la BD local */
     public Pregunta [] obtenerPreguntasAleatorio(int numPreg) {
 
         SQLiteDatabase sqLiteDatabase = sInstance.getReadableDatabase();

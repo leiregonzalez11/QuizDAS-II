@@ -24,6 +24,7 @@ public class numPreguntas extends AppCompatActivity {
         email = datos.getString("email");
     }
 
+    /** Called when the user taps the Jugar button */
     public void jugar (View view){
 
         TextView textnumPreg = findViewById(R.id.textnumPreg);
@@ -43,18 +44,16 @@ public class numPreguntas extends AppCompatActivity {
                 textnumPreg.setText("");
             }else{
                 if (tipo.equals("noAleatorio")){
-                    Log.d("Jugar", "jugarrrrrrrrrr no Aleatorio ");
                     /*Recuperación de datos de la actividad anterior*/
                     String categoria = datos.getString("categoria");
-                    Log.d("Datos: ", categoria + " " + numPreg );
                     Intent intent = new Intent(this, Jugar.class);
                     intent.putExtra("categoria",categoria);
                     intent.putExtra("numPreguntas",numPreg);
                     intent.putExtra("tipo", tipo);
                     intent.putExtra("email", email);
                     startActivity(intent);
-                }else{
-                    Log.d("Jugar", "jugarrrrrrrr Aleatorio ");
+                }
+                else{
                     Intent intent = new Intent(this, Jugar.class);
                     intent.putExtra("numPreguntas",numPreg);
                     intent.putExtra("tipo", tipo);

@@ -50,6 +50,7 @@ public class bienvenida extends AppCompatActivity {
         manager.notify(1, builder.build());
     }
 
+    /** Called when the user taps the Jugar Aleatorio button */
     public void aleatorio(View view){
 
         Intent intent = new Intent(this, numPreguntas.class);
@@ -59,18 +60,21 @@ public class bienvenida extends AppCompatActivity {
         finish();
     }
 
+    /** Called when the user taps the Elegir Categoria button */
     public void categorias(View view){
         Intent intent = new Intent(this, elegirCategorias.class);
         intent.putExtra("email", email);
         startActivity(intent);
     }
 
+    /** Called when the user taps the Configuracion button */
     public void config(View view){
         Intent intent = new Intent(this, userSettings.class);
         intent.putExtra("email", email);
         startActivity(intent);
     }
 
+    /** Called when the user taps the Cerrar Sesion button */
     public void cerrarSesion(View view){
         Intent intent = new Intent(this, IniciarSesion.class);
         startActivity(intent);

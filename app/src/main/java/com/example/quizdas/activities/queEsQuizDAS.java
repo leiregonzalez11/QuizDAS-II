@@ -16,6 +16,7 @@ public class queEsQuizDAS extends AppCompatActivity {
         setContentView(R.layout.activity_que_es);
     }
 
+    /** Called when the user taps the About Us button */
     public void aboutUs(View view){
         finish();
         Intent intent = new Intent(this, aboutUs.class);

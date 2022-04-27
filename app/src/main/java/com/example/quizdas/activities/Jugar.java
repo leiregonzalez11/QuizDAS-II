@@ -39,6 +39,7 @@ public class Jugar extends AppCompatActivity {
 
     }
 
+    /** Método utilizado para inicializar y controlar el juego */
     public void jugar (){
 
         mostrarPreguntaActual();
@@ -67,7 +68,7 @@ public class Jugar extends AppCompatActivity {
 
     }
 
-    //Actualizamos los datos de la View
+    /** Método utilizado para actualizar la interfaz del juego */
     public void mostrarPreguntaActual(){
 
         TextView preg = findViewById(R.id.textPregunta);
@@ -85,6 +86,7 @@ public class Jugar extends AppCompatActivity {
         resp3.setText(preguntas[pregActual].getResp3());
     }
 
+    /** Método utilizado para comprobar si la respuesta elegida es correcta o no */
     public void validarRespuestas(int boton){
 
         Button bresp1 = findViewById(R.id.buttonresp1);

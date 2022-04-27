@@ -15,6 +15,8 @@ public class condicionesUso extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condiciones_uso);
     }
+
+    /** Called when the user taps the Volver button */
     public void volver(View view) {
         finish();
         //Intent intent = new Intent(this, Registrarse.class);

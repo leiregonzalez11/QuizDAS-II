@@ -45,6 +45,7 @@ public class Terminar extends AppCompatActivity {
         }
     }
 
+    /** Called when the user taps the Volver al Menu button */
     public void volverAlMenu(View view){
         finish();
         Intent intent = new Intent(this, bienvenida.class);

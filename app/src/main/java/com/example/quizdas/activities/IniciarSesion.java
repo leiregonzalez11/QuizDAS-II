@@ -20,7 +20,7 @@ public class IniciarSesion extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-
+    /** Called when the user taps the Acceder button */
     public void acceder(View view){
 
         if (validarDatos()) {
@@ -37,6 +37,7 @@ public class IniciarSesion extends AppCompatActivity {
         }
     }
 
+    /** Método utilizado para validar los datos del formulario de inicio de sesión */
     public boolean validarDatos() {
 
         boolean valido = true;
@@ -71,6 +72,8 @@ public class IniciarSesion extends AppCompatActivity {
         return valido;
     }
 
+    /** Método utilizado para comprobar si existe el usuario en la BD local
+     *  y la contraseña introducida coincide con la registrada en la BD local */
     public boolean validarInicioSesion() {
 
         boolean valido = true;

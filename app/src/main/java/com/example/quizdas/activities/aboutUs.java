@@ -42,6 +42,7 @@ public class aboutUs extends AppCompatActivity implements OnMapReadyCallback {
 
     }
 
+    /** Called when the user taps the Volver button */
     public void volver(View view){
         finish();
         Intent intent = new Intent(this, queEsQuizDAS.class);

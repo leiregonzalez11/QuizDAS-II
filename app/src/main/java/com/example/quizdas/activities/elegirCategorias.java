@@ -34,6 +34,7 @@ public class elegirCategorias extends AppCompatActivity {
         catView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                /** Se obtiene la categoría elegida y se pasa al juego*/
                 String categoria =  ((TextView)view.findViewById(R.id.textRow)).getText().toString();
                 siguiente(categoria);
             }
@@ -41,6 +42,7 @@ public class elegirCategorias extends AppCompatActivity {
 
     }
 
+    /** Called when the user taps the Siguiente button */
     public void siguiente (String cat){
         Intent intent = new Intent(this, numPreguntas.class);
         intent.putExtra("tipo", "noAleatorio");

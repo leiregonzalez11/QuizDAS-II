@@ -50,7 +50,7 @@ public class userSettings extends AppCompatActivity {
 
         Button modifButton = findViewById(R.id.buttonVolver);
 
-        modifButton.setOnClickListener(new View.OnClickListener() {
+        modifButton.setOnClickListener(new View.OnClickListener()    {
             @Override
             public void onClick(View view) {
                 //En caso de que todos los datos sean correctos:
@@ -77,6 +77,7 @@ public class userSettings extends AppCompatActivity {
 
     /*Métodos empleados para gestionar la imagen de perfil del usuario*/
 
+    /** Método utilizado para obtener una imagen, en este caso de la galería */
     private void obtenerImagen(){
 
         Intent intentFoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
@@ -100,6 +101,7 @@ public class userSettings extends AppCompatActivity {
 
     }
 
+    /** Método para obtener los datos en la interfaz del usuario */
     public ContentValues obtenerDatosModif(){
 
         ContentValues values = new ContentValues();
@@ -113,6 +115,7 @@ public class userSettings extends AppCompatActivity {
         return values;
     }
 
+    /** Método para validar los datos del formulario de modificar */
     public boolean validarModificaciones() {
 
         boolean valido = true;
