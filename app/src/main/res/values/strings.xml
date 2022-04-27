@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">QuizDAS</string>
+    <string name="whatis">¿Qué es QuizDAS?</string>
+    <string name="nombreVacio">El nombre no puede estar vacío.</string>
+    <string name="nombreLargo">El nombre no puede tener más de 30 caracteres.</string>
+    <string name="passwdVacia">La contraseña no puede estar vacía.</string>
+    <string name="passwdLarga">La contraseña debe tener entre 8 y 15 caracteres</string>
+    <string name="passwdNoCoincide">Las contraseñas no coinciden.</string>
+    <string name="tlfnoLargo">La longitud del teléfono no puede superar los 9 caracteres.</string>
+    <string name="tlfnoNoValido">El teléfono sólo debe contener caracteres numéricos y debe empezar por 6 o 7.</string>
+    <string name="emailVacio">El email no puede estar vacío.</string>
+    <string name="emailNoValido">El email introducido no es correcto.</string>
+    <string name="emailYaExiste">El email introducido ya está registrado.</string>
+    <string name="usuarioNoexiste">No existe ningún usuario con el email </string>
+    <string name="contraseñaIncorrecta">Contraseña incorrecta, inténtelo de nuevo.</string>
+    <string name="dniNoValido">El DNI introducido no es correcto.</string>
+    <string name="dniYaExiste">El DNI introducido ya está registrado.</string>
+    <string name="dniVacio">El DNI no puede estar vacío.</string>
+    <string name="checkboxNoSelecc">Debe aceptar las condiciones para poder registrarse.</string>
+    <string name="dialog_registrarse_titulo">"Registro Completado"</string>
+    <string name="dialog_registrarse">¡Enhorabuena! Te has registrado correctamente.</string>
+    <string name="dialog_buttonaceptar">Aceptar</string>
+    <string name="titulo_condiciones">TÉRMINOS Y CONDICIONES DE USO</string>
+    <string name="condiciones">El Servicio y todos los materiales incluidos o transferidos, incluyendo,
+        sin limitación, software, imágenes, texto, gráficos, logotipos, patentes, marcas registradas,
+        marcas de servicio, derechos de autor, fotografías, audio, videos, música y todos los Derechos de
+        Propiedad Intelectual relacionados con ellos, son la propiedad exclusiva de quizDAS S.L. Salvo que se indique explícitamente en este documento,
+        no se considerará que nada en estos Términos crea una licencia en o bajo ninguno de dichos Derechos de Propiedad Intelectual, y tu aceptas no vender,
+        licenciar, alquilar, modificar, distribuir, copiar, reproducir, transmitir, exhibir públicamente, realizar públicamente, publicar, adaptar, editar o
+        crear trabajos derivados de los mismos.\n
+
+        Para más información, contacte con nosotros:
+        hola@quizdas.com
+    </string>
+    <string name="msgBienvenida">¿Qué te apetece hacer hoy?</string>
+    <string name="catPregunta">Elige tu categoría favorita para jugar:</string>
+    <string name="numpreg">¿Cuántas preguntas quieres jugar?</string>
+    <string name="minmaxpreg">El número de preguntas tiene que ser mínimo 1 y máximo 20</string>
+    <string name="numpregvacio">El número de preguntas no puede estar vacío</string>
+    <string name="noitemSelected">El número de preguntas no puede estar vacío</string>
+    <string name="dialog_titulocorrecta">¡RESPUESTA CORRECTA!</string>
+    <string name="dialog_correcta">Eres un@ crack..</string>
+    <string name="dialog_buttoncorrectaaceptar">Aceptar</string>
+    <string name="queEsQuizDAS">¿Qué es QuizDAS?</string>
+    <string name="queEs">QuizDAS es un juego de entretenimiento con el que podrás poner a prueba tus conocimientos sobre diversos temas de cultura general: Historia,
+        moda, deportes, ciencia, entre otros.\n\n Su dinámica es muy sencilla: trata de acertar la respuesta correcta entre varias opciones de una pregunta determinada.
+        \n ¿Te atreves a jugar?</string>
+    <string name="menos25acertadas"> ¡Qué desastre!</string>
+    <string name="menos50acertadas"> Oh, oh... hay que estudiar más...</string>
+    <string name="menos75acertadas"> Vas en buen camino, ¡Sigue asi!</string>
+    <string name="menos100acertadas"> ¡Te ha faltado muy poco! ¡Casi lo tienes!</string>
+    <string name="todaspregacertadas">Enhorabuena, ¡Eres un crack! </string>
+    <string name="MsgDespedida">¡Ha sido un placer jugar contigo!</string>
+</resources>
