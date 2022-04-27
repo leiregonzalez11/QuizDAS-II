@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "717134013511",
+    "project_id": "das2021-348420",
+    "storage_bucket": "das2021-348420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717134013511:android:2279376b938918edcefd62",
+        "android_client_info": {
+          "package_name": "com.example.quizdas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717134013511-anld5angnkhq8jstnm0jqbr674rot331.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6lh8VphQiTUi2wsWth0IAZ7DgAW-Q34c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717134013511-anld5angnkhq8jstnm0jqbr674rot331.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
