@@ -6,6 +6,7 @@
     <string name="passwdVacia">La contraseña no puede estar vacía.</string>
     <string name="passwdLarga">La contraseña debe tener entre 8 y 15 caracteres</string>
     <string name="passwdNoCoincide">Las contraseñas no coinciden.</string>
+    <string name="tlfnoVacio">La longitud del teléfono no puede superar los 9 caracteres.</string>
     <string name="tlfnoLargo">La longitud del teléfono no puede superar los 9 caracteres.</string>
     <string name="tlfnoNoValido">El teléfono sólo debe contener caracteres numéricos y debe empezar por 6 o 7.</string>
     <string name="emailVacio">El email no puede estar vacío.</string>
@@ -56,5 +57,9 @@
     <string name="dialog_modificar">¡Datos modificados correctamente!.</string>
     <string name="dialog_modif_buttonaceptar">Aceptar</string>
     <string name="google_maps_key">AIzaSyAq4QXhSYBUKpO6eYyrEEyJ2TqRqSHVLyw</string>
+    <string name="fotoperfil">Debe elegir una foto de perfil antes de continuar</string>
+    <string name="errorRegistro">No se pudo registrar el usuario en este momento. Pruebe de nuevo más tarde</string>
+    <string name="errorServidor">No se ha podido establecer la conexion con el servidor. Prueba de nuevo más tarde</string>
+
 
 </resources>

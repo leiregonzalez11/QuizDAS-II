@@ -3,7 +3,6 @@ package com.example.quizdas.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,16 +21,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quizdas.R;
-import com.example.quizdas.Usuario;
 import com.example.quizdas.dialogs.RegistrarseDialogFragment;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -43,7 +37,6 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
     EditText textNombre, textTel, textEmail, textPasswd1, textPasswd2;
     Button registrarBoton;
     RequestQueue request;
-    JsonObjectRequest jsonObjectRequest;
 
     static final int REQUEST_PICK_IMAGE_CAPTURE_REG = 8;
 
@@ -116,7 +109,7 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getApplicationContext(), "No se pudo registrar el usuario en este momento. Pruebe de nuevo más tarde", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.errorServidor), Toast.LENGTH_SHORT).show();
         Log.i("ERROR", error.toString());
     }
 
@@ -126,16 +119,19 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
             DialogFragment registraseAlert = new RegistrarseDialogFragment();
             registraseAlert.show(getSupportFragmentManager(),"registrarse_dialog");
             Log.i("REGISTRO", "Registrado");
-        }else{
-            Toast.makeText(getApplicationContext(), "No registrado: pruebe de nuevo.", Toast.LENGTH_SHORT).show();
-            Log.i("REGISTRO", "No Registrado");
+        }else if (response.equals("Registro_emailexiste")){
+            Toast.makeText(getApplicationContext(), getString(R.string.emailYaExiste), Toast.LENGTH_SHORT).show();
+            Log.i("REGISTRO", "Email Existe");
+        }
+        else {
+            Toast.makeText(getApplicationContext(),  getString(R.string.errorRegistro), Toast.LENGTH_SHORT).show();
+            Log.i("REGISTRO", "Error registro");
         }
 
     }
 
     /** Método utilizado para obtener una imagen, en este caso de la galería */
     public void obtenerImagen(){
-
         Intent intentFoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(intentFoto, REQUEST_PICK_IMAGE_CAPTURE_REG);
     }
@@ -160,7 +156,7 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
     /** Método utilizado para validar los datos del formulario de registro */
     public boolean validarRegistro() {
         boolean valido = true;
-        GestorDB dbHelper = GestorDB.getInstance(this);
+        //GestorDB dbHelper = GestorDB.getInstance(this);
 
         //Validamos el nombre
         String nombre = textNombre.getText().toString();
@@ -174,10 +170,15 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
             valido = false;
         }
 
-        //Validamos el teléfono, en caso de que hubiera
+        //Validamos el teléfono
         String tlfno = textTel.getText().toString();
         Pattern tlfnoRegex = Pattern.compile("^?[67][0-9]{8}$"); //6 o 7 solo 1 vez y entre 0-9 se repite 8 veces
-        if (!tlfno.equals("") && tlfno.length() > 9) {//Si el teléfono supera la longitud maxima
+        if (tlfno.equals("")) {//Si el teléfono supera la longitud maxima
+            Toast.makeText(getApplicationContext(), getString(R.string.tlfnoVacio), Toast.LENGTH_SHORT).show();
+            textTel.setText("");
+            valido = false;
+        }
+        else if (!tlfno.equals("") && tlfno.length() > 9) {//Si el teléfono supera la longitud maxima
             Toast.makeText(getApplicationContext(), getString(R.string.tlfnoLargo), Toast.LENGTH_SHORT).show();
             textTel.setText("");
             valido = false;
@@ -235,10 +236,9 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
 
         //Comprobamos que se ha elegido una foto de perfil
         if (imgUriReg.equals("")) { //Si no está seleccionado
-            Toast.makeText(getApplicationContext(), getString(R.string.checkboxNoSelecc), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.fotoperfil), Toast.LENGTH_SHORT).show();
             valido = false;
         }
-
 
         return valido;
 
@@ -248,19 +248,12 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
     public ContentValues obtenerDatos(){
 
         ContentValues values = new ContentValues();
-        EditText textNombre = findViewById(R.id.textNombre);
         String nombre = textNombre.getText().toString();
         values.put("nombre", nombre);
-        /*EditText textDNI = findViewById(R.id.textDNI);
-        String dni = textDNI.getText().toString();
-        values.put("dni", dni);*/
-        EditText texttlfno = findViewById(R.id.textPhone);
-        String tlfno = texttlfno.getText().toString();
+        String tlfno = textTel.getText().toString();
         values.put("tel", tlfno);
-        EditText textEmail = findViewById(R.id.textEmailRegistro);
         String email = textEmail.getText().toString();
         values.put("email", email);
-        EditText textPasswd1 = findViewById(R.id.textPasswdRegistro);
         String passwd = textPasswd1.getText().toString();
         values.put("password", passwd);
 

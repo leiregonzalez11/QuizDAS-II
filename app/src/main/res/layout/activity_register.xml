@@ -15,7 +15,7 @@
         android:layout_width="78dp"
         android:layout_height="27dp"
         android:fontFamily="@font/bubblegum_sans"
-        android:text="Teléfono"
+        android:text="Teléfono*"
         android:textColor="#AB47BC"
         android:textSize="20sp"
         android:textStyle="bold"
