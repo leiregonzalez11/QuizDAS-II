@@ -70,20 +70,21 @@ public class IniciarSesion extends AppCompatActivity implements Response.Listene
 
     @Override
     public void onResponse(String response) {
-        Log.d("Respuesta", response);
-        String respuesta = response;
-        if (respuesta.equals("Login_ok")){
-            acceder();
-            Log.i("LOGIN", "Login Ok");
-        }else if (respuesta.equals("Login_emailnoexiste")){
-            Toast.makeText(getApplicationContext(), getString(R.string.usuarioNoexiste), Toast.LENGTH_SHORT).show();
-            Log.i("LOGIN", "Email no existe");
-        } else if (respuesta.equals("Login_passwdnotvalid")){
-            Toast.makeText(getApplicationContext(),  getString(R.string.contraseñaIncorrecta), Toast.LENGTH_SHORT).show();
-            Log.i("LOGIN", "Contraseña incorrecta");
-        }else{
-            Toast.makeText(getApplicationContext(),  "error desconocido", Toast.LENGTH_SHORT).show();
-            Log.i("LOGIN", "error desconocido");
+        Log.d("Respuesta", response.trim());
+        String respuesta = response.trim();
+        switch (respuesta){
+            case "Login_ok":
+                acceder();
+                Log.i("LOGIN", "Login Ok");
+                break;
+            case "Login_emailnoexiste":
+                Toast.makeText(getApplicationContext(), getString(R.string.usuarioNoexiste), Toast.LENGTH_SHORT).show();
+                Log.i("LOGIN", "Email no existe");
+                break;
+            case "Login_passwdnotvalid":
+                Toast.makeText(getApplicationContext(),  getString(R.string.contraseñaIncorrecta), Toast.LENGTH_SHORT).show();
+                Log.i("LOGIN", "Contraseña incorrecta");
+                break;
         }
 
     }
