@@ -1,40 +1,100 @@
 package com.example.quizdas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.quizdas.R;
 
 import java.util.regex.Pattern;
 
-public class IniciarSesion extends AppCompatActivity {
+public class IniciarSesion extends AppCompatActivity implements Response.Listener<String>, Response.ErrorListener {
+
+    EditText  textEmail, textPasswd;
+    Button loginBoton;
+    RequestQueue request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        textEmail = findViewById(R.id.textEmailLogin);
+        textPasswd = findViewById(R.id.textPaswdLogin);
+
+        request = Volley.newRequestQueue(getApplicationContext());
+
+        loginBoton = findViewById(R.id.buttonAcceder);
+
+        loginBoton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (validarDatos()){ //En caso de que todos los datos sean correctos:
+                    cargarWebService();
+                }
+            }
+        });
+
+
     }
 
-    /** Called when the user taps the Acceder button */
-    public void acceder(View view){
+    private void cargarWebService() {
 
-        if (validarDatos()) {
-            if (validarInicioSesion()) {
+        String url = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/lgonzalez184/WEB/inicioSesion.php?email="
+        +textEmail.getText().toString() + "&passwd=" +textPasswd.getText().toString();
 
-                EditText textEmail = findViewById(R.id.textEmailLogin);
-                String email = textEmail.getText().toString();
+        url = url.replace(" ", "%20");
 
-                Intent intent = new Intent(this, bienvenida.class);
-                intent.putExtra("email", email);
-                startActivity(intent);
-                finish();
-            }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, this,this);
+        request.add(stringRequest);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Toast.makeText(getApplicationContext(), getString(R.string.errorServidor), Toast.LENGTH_SHORT).show();
+        Log.i("ERROR", error.toString());
+    }
+
+    @Override
+    public void onResponse(String response) {
+        Log.d("Respuesta", response);
+        String respuesta = response;
+        if (respuesta.equals("Login_ok")){
+            acceder();
+            Log.i("LOGIN", "Login Ok");
+        }else if (respuesta.equals("Login_emailnoexiste")){
+            Toast.makeText(getApplicationContext(), getString(R.string.usuarioNoexiste), Toast.LENGTH_SHORT).show();
+            Log.i("LOGIN", "Email no existe");
+        } else if (respuesta.equals("Login_passwdnotvalid")){
+            Toast.makeText(getApplicationContext(),  getString(R.string.contraseñaIncorrecta), Toast.LENGTH_SHORT).show();
+            Log.i("LOGIN", "Contraseña incorrecta");
+        }else{
+            Toast.makeText(getApplicationContext(),  "error desconocido", Toast.LENGTH_SHORT).show();
+            Log.i("LOGIN", "error desconocido");
         }
+
+    }
+
+    /** Called when the user taps the Acceder button (usando BD local) */
+    public void acceder(){
+        String email = textEmail.getText().toString();
+        Intent intent = new Intent(this, bienvenida.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+        finish();
     }
 
     /** Método utilizado para validar los datos del formulario de inicio de sesión */
@@ -42,7 +102,6 @@ public class IniciarSesion extends AppCompatActivity {
 
         boolean valido = true;
         //Validamos el email
-        EditText textEmail = findViewById(R.id.textEmailLogin);
         String email = textEmail.getText().toString();
         Pattern patternEmail = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -57,15 +116,14 @@ public class IniciarSesion extends AppCompatActivity {
         }
 
         //Validamos la contraseña
-        EditText textPasswd1 = findViewById(R.id.textPaswdLogin);
-        String passwd = textPasswd1.getText().toString();
+        String passwd = textPasswd.getText().toString();
         if (passwd.equals("")) { //Si el EditText de Password está vacío
             Toast.makeText(getApplicationContext(), getString(R.string.passwdVacia), Toast.LENGTH_SHORT).show();
-            textPasswd1.setText("");
+            textPasswd.setText("");
             valido = false;
         } else if (passwd.length() <8 || passwd.length() > 16) { //Si el password no cumple la longitud mínima o máxima
             Toast.makeText(getApplicationContext(), getString(R.string.passwdLarga), Toast.LENGTH_SHORT).show();
-            textPasswd1.setText("");
+            textPasswd.setText("");
             valido = false;
         }
 

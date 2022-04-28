@@ -31,8 +31,7 @@ public class Inicio extends AppCompatActivity {
 
     /** Called when the user taps the Iniciar Sesión button */
     public void iniciarSesion(View view) {
-        //Intent intent = new Intent(this, IniciarSesion.class);
-        Intent intent = new Intent(this, bienvenida.class);
+        Intent intent = new Intent(this, IniciarSesion.class);
         startActivity(intent);
     }
 
