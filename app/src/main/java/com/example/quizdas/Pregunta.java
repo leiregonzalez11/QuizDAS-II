@@ -1,4 +1,4 @@
-package com.example.quizdas.activities;
+package com.example.quizdas;
 
 public class Pregunta {
 

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.quizdas.Pregunta;
 import com.example.quizdas.R;
 
 public class Jugar extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class Jugar extends AppCompatActivity {
     private int numPregCorrectas = 0;
     private int pregActual = 0;
     private String email;
-    private Pregunta [] preguntas;
+    private Pregunta[] preguntas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

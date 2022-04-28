@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.quizdas.Pregunta;
 import com.example.quizdas.R;
 
 import java.io.BufferedReader;
@@ -188,7 +189,7 @@ public class GestorDB extends SQLiteOpenHelper{
 
     /** Método para obtener el nº de preguntas elegido para el juego
      *  de la categoria elegida desde la BD local */
-    public Pregunta [] obtenerPreguntas(String categoria, int numPreg) {
+    public Pregunta[] obtenerPreguntas(String categoria, int numPreg) {
 
         SQLiteDatabase sqLiteDatabase = sInstance.getReadableDatabase();
 
