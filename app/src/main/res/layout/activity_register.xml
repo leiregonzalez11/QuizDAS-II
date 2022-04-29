@@ -257,8 +257,8 @@
 
     <EditText
         android:id="@+id/textNombre"
-        android:layout_width="189dp"
-        android:layout_height="42dp"
+        android:layout_width="324dp"
+        android:layout_height="39dp"
         android:ems="10"
         android:fontFamily="@font/bubblegum_sans"
         android:inputType="textPersonName"
@@ -267,39 +267,11 @@
         android:textSize="20sp"
         android:theme="@style/CampoTexto"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257" />
-
-    <ImageView
-        android:id="@+id/imagenperfilReg"
-        android:layout_width="99dp"
-        android:layout_height="99dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.839"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198"
-        app:srcCompat="@drawable/defaultuser" />
-
-    <Button
-        android:id="@+id/registerFotoButton"
-        android:layout_width="121dp"
-        android:layout_height="34dp"
-        android:background="#4A148C"
-        android:fontFamily="@font/bubblegum_sans"
-        android:text="Elegir foto..."
-        android:textColor="#FDFFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.882"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.27" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

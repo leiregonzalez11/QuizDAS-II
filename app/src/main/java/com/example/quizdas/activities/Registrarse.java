@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,26 +18,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.quizdas.R;
 import com.example.quizdas.dialogs.RegistrarseDialogFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Registrarse extends AppCompatActivity implements Response.Listener<String>, Response.ErrorListener {
 
-    String imgUriReg = "";
-    Bitmap bitmapReg;
     EditText textNombre, textTel, textEmail, textPasswd1, textPasswd2;
     Button registrarBoton;
     RequestQueue request;
+    StringRequest stringRequest;
 
     static final int REQUEST_PICK_IMAGE_CAPTURE_REG = 8;
 
@@ -51,16 +56,7 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
         textPasswd1 = findViewById(R.id.textPasswdRegistro);
         textPasswd2 = findViewById(R.id.textPasswdRegistro2);
 
-        request = Volley.newRequestQueue(getApplicationContext());
-
-        /** Called when the user taps the Elegir foto button */
-        Button fotoRegistro = findViewById(R.id.registerFotoButton);
-        fotoRegistro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                obtenerImagen();
-            }
-        });
+        request = Volley.newRequestQueue(this);
 
         registrarBoton = findViewById(R.id.buttonRegistrarse);
 
@@ -68,6 +64,7 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
             @Override
             public void onClick(View view) {
                 if (validarRegistro()){ //En caso de que todos los datos sean correctos:
+                    Log.i("REGISTRO", "Registro validado");
                     cargarWebService();
                 }
             }
@@ -95,63 +92,6 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
         });*/
     }
 
-    private void cargarWebService() {
-
-        String url = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/lgonzalez184/WEB/registrarUser.php?nombre="
-                + textNombre.getText().toString() + "&tel=" + textTel.getText().toString() + "&foto=" + imgUriReg + "&email="
-                +textEmail.getText().toString() + "&passwd=" + textPasswd1.getText().toString();
-
-        url = url.replace(" ", "%20");
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, this,this);
-        request.add(stringRequest);
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Toast.makeText(getApplicationContext(), getString(R.string.errorServidor), Toast.LENGTH_SHORT).show();
-        Log.i("ERROR", error.toString());
-    }
-
-    @Override
-    public void onResponse(String response) {
-        if (response.equals("Registro_done")){
-            DialogFragment registraseAlert = new RegistrarseDialogFragment();
-            registraseAlert.show(getSupportFragmentManager(),"registrarse_dialog");
-            Log.i("REGISTRO", "Registrado");
-        }else if (response.equals("Registro_emailexiste")){
-            Toast.makeText(getApplicationContext(), getString(R.string.emailYaExiste), Toast.LENGTH_SHORT).show();
-            Log.i("REGISTRO", "Email Existe");
-        }
-        else {
-            Toast.makeText(getApplicationContext(),  getString(R.string.errorRegistro), Toast.LENGTH_SHORT).show();
-            Log.i("REGISTRO", "Error registro");
-        }
-
-    }
-
-    /** Método utilizado para obtener una imagen, en este caso de la galería */
-    public void obtenerImagen(){
-        Intent intentFoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(intentFoto, REQUEST_PICK_IMAGE_CAPTURE_REG);
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if ((requestCode == REQUEST_PICK_IMAGE_CAPTURE_REG) && resultCode == RESULT_OK) {
-            //Obtengo la imagen seleccionada de la galeria
-            Uri imagenSeleccionada = data.getData();
-            try {
-                bitmapReg = MediaStore.Images.Media.getBitmap(getContentResolver(),imagenSeleccionada);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ImageView imgPreviewReg = findViewById(R.id.imagenperfilReg);
-            imgPreviewReg.setImageURI(imagenSeleccionada);
-            imgUriReg=imagenSeleccionada.toString();
-        }
-
-    }
 
     /** Método utilizado para validar los datos del formulario de registro */
     public boolean validarRegistro() {
@@ -234,12 +174,6 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
             valido = false;
         }
 
-        //Comprobamos que se ha elegido una foto de perfil
-        if (imgUriReg.equals("")) { //Si no está seleccionado
-            Toast.makeText(getApplicationContext(), getString(R.string.fotoperfil), Toast.LENGTH_SHORT).show();
-            valido = false;
-        }
-
         return valido;
 
     }
@@ -264,6 +198,42 @@ public class Registrarse extends AppCompatActivity implements Response.Listener<
     public void condicionesdeUso(View view) {
         Intent intent = new Intent(this, condicionesUso.class);
         startActivity(intent);
+    }
+
+    /** Método utilizado para enviar los datos al servidor e introducirlos en la BD  (Método GET)*/
+    private void cargarWebService() {
+
+        String url = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/lgonzalez184/WEB/registrarUser.php?nombre="
+                + textNombre.getText().toString() + "&tel=" + textTel.getText().toString() + "&email="
+                +textEmail.getText().toString() + "&passwd=" + textPasswd1.getText().toString();
+
+        url = url.replace(" ", "%20");
+
+        stringRequest = new StringRequest(Request.Method.GET, url, this,this);
+        request.add(stringRequest);
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Toast.makeText(getApplicationContext(), getString(R.string.errorServidor), Toast.LENGTH_SHORT).show();
+        Log.i("ERROR", error.toString());
+    }
+
+    @Override
+    public void onResponse(String response) {
+        if (response.equals("Registro_done")){
+            DialogFragment registraseAlert = new RegistrarseDialogFragment();
+            registraseAlert.show(getSupportFragmentManager(),"registrarse_dialog");
+            Log.i("REGISTRO", "Registrado");
+        }else if (response.equals("Registro_emailexiste")){
+            Toast.makeText(getApplicationContext(), getString(R.string.emailYaExiste), Toast.LENGTH_SHORT).show();
+            Log.i("REGISTRO", "Email Existe");
+        }
+        else {
+            Toast.makeText(getApplicationContext(),  getString(R.string.errorRegistro), Toast.LENGTH_SHORT).show();
+            Log.i("REGISTRO", "Error registro");
+        }
+
     }
 
 }
