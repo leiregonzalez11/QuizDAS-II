@@ -22,20 +22,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.quizdas.R;
 import com.example.quizdas.dialogs.ModificarDialogFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class userSettings extends AppCompatActivity implements Response.Listener<String>, Response.ErrorListener {
 
-    String imgUri;
+    String imgUri = "";
     String email;
     Bitmap bitmap;
     ImageView imgPreview;
     RequestQueue request;
-    EditText textPasswdmodif1, texttel, textPasswdmodif2;
+    Uri imagenSeleccionada;
+    FirebaseStorage storage;
+    StorageReference storageRef;
+    EditText textPasswdmodif1, textPasswdmodif2;
     static final int REQUEST_PICK_IMAGE_CAPTURE = 10;
 
     @Override
@@ -45,9 +52,17 @@ public class userSettings extends AppCompatActivity implements Response.Listener
 
         Bundle datos = this.getIntent().getExtras();
         email = datos.getString("email");
+        Log.i("Email", email);
 
         textPasswdmodif1 = findViewById(R.id.textPaswdModif1);
         textPasswdmodif2 = findViewById(R.id.textPaswdModif2);
+
+        imgPreview = findViewById(R.id.imagenperfil);
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
+
+        obtenerImagenFirebase();
 
         Button editfoto = findViewById(R.id.editFoto);
         editfoto.setOnClickListener(new View.OnClickListener() {
@@ -57,24 +72,34 @@ public class userSettings extends AppCompatActivity implements Response.Listener
             }
         });
 
-        request = Volley.newRequestQueue(getApplicationContext());
-
         Button modifButton = findViewById(R.id.buttonVolver);
+        request = Volley.newRequestQueue(getApplicationContext());
 
         modifButton.setOnClickListener(new View.OnClickListener()    {
             @Override
             public void onClick(View view) {
-                //En caso de que todos los datos sean correctos:
-                if (validarModificaciones()){ //Comprobar por que no funciona
+                //En caso de que todos los datos sean correctos y no se haya modificado la imagen
+                if (validarModificaciones() && imgUri.equals("")){
                     cargarWebService();
+                } //En caso de que todos los datos sean correctos y se haya modificado la imagen
+                else if (validarModificaciones() && !imgUri.equals("")){
+                    modificarImagenFirebase();
+                    cargarWebService();
+                }else if (!validarModificaciones() && !imgUri.equals("")){ //En caso de que no se haya modificado la passwd y se haya modificado la imagen
+                    modificarImagenFirebase();
+                    siguiente();
+                }else{
+                    Toast.makeText(getApplicationContext(), getString(R.string.nodatosmodif), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
+    /** Método utilizado para modificar los datos en la BBDD remota */
     private void cargarWebService() {
 
-        String url = "";
+        String url = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/lgonzalez184/WEB/actualizarDatosUsuario.php?email="
+                + email + "&passwd=" + textPasswdmodif1.getText().toString();;
 
         url = url.replace(" ", "%20");
 
@@ -93,9 +118,13 @@ public class userSettings extends AppCompatActivity implements Response.Listener
         Log.d("Respuesta", response.trim());
         String respuesta = response.trim();
         switch (respuesta){
-            case "Modif_ok":
+            case "Modificacion_done":
                 siguiente();
                 Log.i("MODIF", "Modif Ok");
+                break;
+            case "Modificacion_notdone":
+                Toast.makeText(getApplicationContext(), getString(R.string.errorModif), Toast.LENGTH_SHORT).show();
+                Log.i("MODIF", "Modif not done");
                 break;
         }
 
@@ -114,7 +143,7 @@ public class userSettings extends AppCompatActivity implements Response.Listener
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == REQUEST_PICK_IMAGE_CAPTURE) && resultCode == RESULT_OK) {
             //Obtengo la imagen seleccionada de la galeria
-            Uri imagenSeleccionada = data.getData();
+            imagenSeleccionada = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imagenSeleccionada);
             } catch (IOException e) {
@@ -127,11 +156,38 @@ public class userSettings extends AppCompatActivity implements Response.Listener
 
     }
 
+    /** Método utilizado para modificar los datos y avanzar a la siguiente interfaz */
     public void siguiente(){
+
+        Bundle bundle = new Bundle();
+        bundle.putString("email", email);
+
         DialogFragment modifAlert = new ModificarDialogFragment();
+        modifAlert.setArguments(bundle);
         modifAlert.show(getSupportFragmentManager(),"modificar_dialog");
     }
 
+    /** Método utilizado para obtener la imagen de Firebase Storage */
+    private void obtenerImagenFirebase(){
+        StorageReference pathReference = storageRef.child(email + ".jpg");
+        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext()).load(uri).into(imgPreview);
+            }
+        });
+
+    }
+
+    /** Método utilizado para modificar la imagen asociada al usuario en Firebase Storage */
+    private void modificarImagenFirebase() {
+        StorageReference lastRef = storageRef.child(email +".jpg"); //Eliminamos la foto anterior
+        lastRef.delete();
+        StorageReference spaceRef = storageRef.child(email +".jpg"); //Añadimos la nueva imagen
+        spaceRef.putFile(imagenSeleccionada);
+    }
+
+    /*Métodos empleados para la validación de datos*/
 
     /** Método para validar los datos del formulario de modificar */
     public boolean validarModificaciones() {
@@ -142,25 +198,24 @@ public class userSettings extends AppCompatActivity implements Response.Listener
         //NOTA: No se comprueba si la contraseña de confirmación no son correctas, ya que, en caso de que no coincidan, salta ya un error.
         String passwd = textPasswdmodif1.getText().toString();
         String passwdConf = textPasswdmodif2.getText().toString();
-        if (!passwdConf.equals(passwd)) { //Si son distintas
+         if (passwdConf.equals("") && passwd.equals("") && imgUri.equals("")) { //Si son distintas
+            Toast.makeText(getApplicationContext(), getString(R.string.nodatosmodif), Toast.LENGTH_SHORT).show();
+            textPasswdmodif1.setText("");
+            textPasswdmodif2.setText("");
+            valido = false;
+        }
+        else if (passwdConf.equals("") && passwd.equals("") && !imgUri.equals("")) { //Si son distintas
+            valido = false;
+        }
+        else if (!passwdConf.equals(passwd)) { //Si son distintas
             Toast.makeText(getApplicationContext(), getString(R.string.passwdNoCoincide), Toast.LENGTH_SHORT).show();
             textPasswdmodif1.setText("");
             textPasswdmodif2.setText("");
             valido = false;
-        } else {
-            if (passwd.equals("")) { //Si el EditText de Password está vacío
-
-            } else if (passwd.length() < 8 || passwd.length() > 16) { //Si el EditText de Password no cumple la longitud
-                Toast.makeText(getApplicationContext(), getString(R.string.passwdLarga), Toast.LENGTH_SHORT).show();
-                textPasswdmodif1.setText("");
-                textPasswdmodif2.setText("");
-                valido = false;
-            }
-        }
-
-        //Comprobamos que se ha elegido una foto de perfil
-        if (imgUri.equals("")) { //Si no está seleccionado
-            Toast.makeText(getApplicationContext(), getString(R.string.fotoperfil), Toast.LENGTH_SHORT).show();
+        } else if (!passwd.equals("") && (passwd.length() < 8 || passwd.length() > 16)) { //Si el EditText de Password no cumple la longitud
+            Toast.makeText(getApplicationContext(), getString(R.string.passwdLarga), Toast.LENGTH_SHORT).show();
+            textPasswdmodif1.setText("");
+            textPasswdmodif2.setText("");
             valido = false;
         }
 

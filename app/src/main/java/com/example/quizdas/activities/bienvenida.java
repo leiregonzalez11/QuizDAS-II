@@ -27,8 +27,8 @@ public class bienvenida extends AppCompatActivity {
         TextView textUser = findViewById(R.id.textBienvenida);
 
         /*Recuperación de datos de la actividad anterior*/
-        //Bundle datos = this.getIntent().getExtras();
-        // email = datos.getString("email");
+        Bundle datos = this.getIntent().getExtras();
+        email = datos.getString("email");
 
         //String nameUser = dbHelper.obtenerNombreUser(email);
         //textUser.setText("¡Bienvenid@ " + nameUser + "!");

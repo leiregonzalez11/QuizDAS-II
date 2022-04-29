@@ -11,21 +11,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.quizdas.R;
-import com.example.quizdas.activities.Inicio;
+import com.example.quizdas.activities.bienvenida;
 
 public class ModificarDialogFragment extends DialogFragment {
 
-    String email;
+    String email="";
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
 
+        Bundle data = getArguments();
+        email = data.getString("email");
 
-        email = getArguments().getString("email");
-
-        Intent bienvenida = new Intent(getActivity(), Inicio.class);
+        Intent bienvenida = new Intent(getActivity(), com.example.quizdas.activities.bienvenida.class);
         bienvenida.putExtra("email", email);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.dialog_modificar_titulo);

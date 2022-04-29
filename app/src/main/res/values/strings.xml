@@ -53,13 +53,15 @@
     <string name="todaspregacertadas">Enhorabuena, ¡Eres un crack! </string>
     <string name="MsgDespedida">¡Ha sido un placer jugar contigo!</string>
     <string name="errorBD">Error al iniciar sesión: intentelo de nuevo por favor.</string>
-    <string name="dialog_modificar_titulo">"Registro Completado"</string>
+    <string name="dialog_modificar_titulo">"Modificación Completada"</string>
     <string name="dialog_modificar">¡Datos modificados correctamente!.</string>
     <string name="dialog_modif_buttonaceptar">Aceptar</string>
     <string name="google_maps_key">AIzaSyAq4QXhSYBUKpO6eYyrEEyJ2TqRqSHVLyw</string>
     <string name="fotoperfil">Debe elegir una foto de perfil antes de continuar</string>
     <string name="errorRegistro">No se pudo registrar el usuario en este momento. Pruebe de nuevo más tarde</string>
     <string name="errorServidor">No se ha podido establecer la conexion con el servidor. Prueba de nuevo más tarde</string>
+    <string name="errorModif">No se pudo modificar los datos en este momento. Pruebe de nuevo más tarde</string>
+    <string name="nodatosmodif">No se ha modificado ningún campo</string>
 
 
 </resources>
