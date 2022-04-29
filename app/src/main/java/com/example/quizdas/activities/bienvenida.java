@@ -55,6 +55,7 @@ public class bienvenida extends AppCompatActivity {
 
         Intent intent = new Intent(this, numPreguntas.class);
         intent.putExtra("tipo", "aleatorio");
+        intent.putExtra("email", email);
         startActivity(intent);
         finish();
     }
@@ -62,6 +63,7 @@ public class bienvenida extends AppCompatActivity {
     /** Called when the user taps the Elegir Categoria button */
     public void categorias(View view){
         Intent intent = new Intent(this, elegirCategorias.class);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
 
